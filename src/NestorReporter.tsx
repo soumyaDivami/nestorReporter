@@ -179,7 +179,7 @@ export const NestorReporter = (props: any) => {
               {projectsList
                 .filter((x: { status: string; }) => x.status === "Active")
                 .map((x: any) => (
-                  <MenuItem value={x.projectId}>{x.name}</MenuItem>
+                  <MenuItem key={x.projectId} value={x.projectId}>{x.name}</MenuItem>
                 ))}
             </Select>}
         </FormControl>
@@ -202,8 +202,8 @@ export const NestorReporter = (props: any) => {
               <div className="header">{"Time"}</div>
             </div>
             {selectedProjectDataView.length > 0 &&
-              selectedProjectDataView.map((dt: any) => (
-                <div className={`grid ${dt.resourcename ? 'grid-border-top' : ''}`}>
+              selectedProjectDataView.map((dt: any, idx: any) => (
+                <div className={`grid ${dt.resourcename ? 'grid-border-top' : ''}`} key={`${dt.resourcename}-${idx}`}>
                   <div>{dt.resourcename}</div>
                   <div>{dt.taskType}</div>
                   <div>{Number(dt.TotalHours).toFixed(2)}</div>

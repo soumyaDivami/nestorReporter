@@ -85,7 +85,7 @@ export const OverallProjectView = (props: any) => {
                 }))
                 ]
             })
-            console.log(newData)
+            // console.log(newData)
             setOverallTaskTableData(() => [...newData])
         }
     }, [OverallDataState])
@@ -105,7 +105,7 @@ export const OverallProjectView = (props: any) => {
                 })
                 newData = [...newData, obj]
             })
-            console.log("setOverallTaskBarData => ", newData)
+            // console.log("setOverallTaskBarData => ", newData)
             setOverallTaskBarData(() => [...newData])
         }
     }, [OverallDataState])
@@ -122,8 +122,8 @@ export const OverallProjectView = (props: any) => {
                             <div className="header">{"Time"}</div>
                         </div>
                         {OverallTaskTableData.length > 0 &&
-                            OverallTaskTableData.map((dt: any) => (
-                                <div className={`grid ${dt.name ? 'grid-border-top' : ''}`}>
+                            OverallTaskTableData.map((dt: any, idx: number) => (
+                                <div className={`grid ${dt.name ? 'grid-border-top' : ''}`} key={`${dt.name}-${idx}`}>
                                     <div>{dt.name}</div>
                                     <div>{getTaskLabel(dt.type)}</div>
                                     <div>{Number(dt.hours).toFixed(2)}</div>
