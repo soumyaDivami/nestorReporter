@@ -81,17 +81,18 @@ export const NestorReporter = (props: any) => {
       let viewData: any[] = [];
       let tasktypes: any[] = selectedProjectData.map((x: { taskType: any; }) => x.taskType);
       tasktypes = [...(new Set(tasktypes))];
-      // console.log(selectedProjectData)
+      const totalOverallHours = selectedProjectData.reduce((acc: number, curr: { TotalHours: any; }) => acc + Number(curr.TotalHours), 0)
       tasktypes.forEach((tt: any) => {
+        const value = selectedProjectData
+          .filter((x: { taskType: any; }) => x.taskType === tt)
+          .reduce((acc: number, curr: { TotalHours: any; }) => acc + Number(curr.TotalHours), 0)
+        const percentval = value ? Number((value / totalOverallHours) * 100).toFixed(2) : "0.00"
         viewData = [
           ...viewData,
           {
-            id: getTaskLabel(tt),
+            id: `${getTaskLabel(tt)} (${percentval}%)`,
             label: getTaskLabel(tt),
-            value: Number(
-              selectedProjectData
-                .filter((x: { taskType: any; }) => x.taskType === tt)
-                .reduce((acc: number, curr: { TotalHours: any; }) => acc + Number(curr.TotalHours), 0)
+            value: Number(value
             ).toFixed(2),
             color: `hsl(${getRandomInt(tt)}, 70%, 50%)`
           }
@@ -105,18 +106,18 @@ export const NestorReporter = (props: any) => {
       let viewData: any[] = [];
       let names: any[] = selectedProjectData.map((x: { resourcename: any; }) => x.resourcename);
       names = [...(new Set(names))];
-      // console.log(selectedProjectData)
+      const totalOverallHours = selectedProjectData.reduce((acc: number, curr: { TotalHours: any; }) => acc + Number(curr.TotalHours), 0)
       names.forEach((nm: any) => {
+        const value = selectedProjectData
+          .filter((x: { resourcename: any; }) => x.resourcename === nm)
+          .reduce((acc: number, curr: { TotalHours: any; }) => acc + Number(curr.TotalHours), 0)
+        const percentval = value ? Number((value / totalOverallHours) * 100).toFixed(2) : "0.00"
         viewData = [
           ...viewData,
           {
-            id: nm,
+            id: `${nm}(${percentval}%)`,
             label: nm,
-            value: Number(
-              selectedProjectData
-                .filter((x: { resourcename: any; }) => x.resourcename === nm)
-                .reduce((acc: number, curr: { TotalHours: any; }) => acc + Number(curr.TotalHours), 0)
-            ).toFixed(2),
+            value: Number(value).toFixed(2),
             color: `hsl(${getRandomIntNM()}, 70%, 50%)`
           }
         ];
