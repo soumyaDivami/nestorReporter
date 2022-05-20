@@ -90,7 +90,7 @@ export const NivoBar = (props: { data: any[] }) => {
                 tickRotation: 0,
                 legend: 'Hours',
                 legendPosition: 'middle',
-                legendOffset: -40
+                legendOffset: -50
             }}
             labelSkipWidth={12}
             labelSkipHeight={12}

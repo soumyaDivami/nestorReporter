@@ -138,7 +138,7 @@ export const OverallProjectView = (props: any) => {
                 </div>
             </div>
             <div className="scroll-btn" onClick={() => {
-                document.getElementById("overall-bar-graph")?.scrollIntoView({ behavior: "smooth", block: "end", inline: "end" })
+                document.getElementById("overall-bar-graph")?.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" })
             }} >
                 <span>Click to see all projects</span>
                 <img src={downChevron} alt="Scroll" title="Scroll to bottom" />
