@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getRandomInt, getRandomIntNM, getTaskLabel } from "./utils";
+import { getRandomInt, getRandomIntNM, getTaskLabel, onlyUniqueValues } from "./utils";
 import "./styles.css";
 import { NivoPie } from "./NivoPie";
 import { Button, FormControl, MenuItem, Select } from "@material-ui/core";
@@ -38,9 +38,9 @@ export const NestorReporter = (props: any) => {
     if (selectedProjectData.length > 0) {
       let viewData: any[] = [];
       let names: any[] = selectedProjectData.map((x: { resourcename: any; }) => x.resourcename);
-      names = [...(new Set(names))];
+      names = onlyUniqueValues(names); // [...(new Set(names))];
       let tasktypes: any[] = selectedProjectData.map((x: { taskType: any; }) => x.taskType);
-      tasktypes = [...(new Set(tasktypes))];
+      tasktypes = onlyUniqueValues(tasktypes); // [...(new Set(tasktypes))];
 
       names.forEach((nm: any) => {
         let totalTimeByResource = selectedProjectData
@@ -80,7 +80,7 @@ export const NestorReporter = (props: any) => {
     if (selectedProjectData.length > 0) {
       let viewData: any[] = [];
       let tasktypes: any[] = selectedProjectData.map((x: { taskType: any; }) => x.taskType);
-      tasktypes = [...(new Set(tasktypes))];
+      tasktypes = onlyUniqueValues(tasktypes); // [...(new Set(tasktypes))];
       const totalOverallHours = selectedProjectData.reduce((acc: number, curr: { TotalHours: any; }) => acc + Number(curr.TotalHours), 0)
       tasktypes.forEach((tt: any) => {
         const value = selectedProjectData
@@ -105,7 +105,7 @@ export const NestorReporter = (props: any) => {
     if (selectedProjectData.length > 0) {
       let viewData: any[] = [];
       let names: any[] = selectedProjectData.map((x: { resourcename: any; }) => x.resourcename);
-      names = [...(new Set(names))];
+      names = onlyUniqueValues(names); // [...(new Set(names))];
       const totalOverallHours = selectedProjectData.reduce((acc: number, curr: { TotalHours: any; }) => acc + Number(curr.TotalHours), 0)
       names.forEach((nm: any) => {
         const value = selectedProjectData
@@ -216,7 +216,7 @@ export const NestorReporter = (props: any) => {
               color="primary"
               value={PiewViewSwitch}
               exclusive
-              onChange={(e) => {
+              onChange={(e: any) => {
                 setPiewViewSwitch((_prev: string) => e.target.value)
               }}
             >

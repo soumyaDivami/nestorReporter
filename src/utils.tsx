@@ -25,9 +25,9 @@ export const getRandomIntNM = () => {
 
 export const consolidateProjData = (projData: any[]) => {
   let names = projData.map((x: { resourcename: any; }) => x.resourcename);
-  names = [...new Set(names)];
+  names = onlyUniqueValues(names) //[...new Set(names)];
   let tasktypes = projData.map((x: { taskType: any; }) => x.taskType);
-  tasktypes = [...new Set(tasktypes)];
+  tasktypes = onlyUniqueValues(tasktypes) //[...new Set(tasktypes)];
   let returnData: any[] = [];
   names.forEach((nm: any) => {
     tasktypes.forEach((tt: any) => {
@@ -115,4 +115,12 @@ export const getTaskLabel = (type: string) => {
   if (type === "documentation") return "Documentation";
   if (type === "meetings") return "Meetings";
   if (type === "others") return "Others";
+}
+
+export const uniqueFn = (value: any, index: any, self: string | any[]) => {
+  return self.indexOf(value) === index;
+}
+
+export const onlyUniqueValues = (arr: any[]) => {
+  return arr.filter(uniqueFn)
 }

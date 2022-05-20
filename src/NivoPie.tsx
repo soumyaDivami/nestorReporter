@@ -42,7 +42,7 @@ export const NivoPie = (props: any) => {
           stagger: true
         }
       ]}
-      fill={data.map((x) => ({
+      fill={data.map((x: { id: any; }) => ({
         match: {
           id: x.id
         },
